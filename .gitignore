@@ -11,8 +11,5 @@
 /servers/fetch-data/build/*
 /servers/serve-data/build/*
 
-#api-config
-/servers/fetch-data/config.js
-
 # ide
 /.idea/*

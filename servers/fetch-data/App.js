@@ -17,7 +17,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', () => {
-    io.emit('msg', 'newData');
+    io.emit('msg', 'newData')
 });
 
 function fetchData() {
@@ -30,7 +30,7 @@ function fetchData() {
         }
     })
     .then(response => {
-        return response.json();
+        return response.json()
     })
     .then(json => {
         let data = json.current;
@@ -38,13 +38,14 @@ function fetchData() {
         MongoClient.connect(DATABASE_URL, (err, db) => {
             if (err) throw err;
             let dbo = db.db('pollution-warning-display-data');
+
             dbo.collection('airlyData').insertOne(data, err => {
                 if (err) throw err;
-                db.close();
-            });
+                db.close()
+            })
         });
 
-        io.emit('msg', 'newData');
+        io.emit('msg', 'newData')
     })
 }
 

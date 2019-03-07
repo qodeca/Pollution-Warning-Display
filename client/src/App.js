@@ -11,11 +11,11 @@ class App extends Component {
             pressure: {},
             humidity: {},
             temperature: {}
-        };
+        }
     }
 
     fetchData() {
-        axios.get('http://localhost:3001/api', { timeout: 60000 })
+        axios.get('http://localhost:3001/api', { timeout: 30000 })
             .then(response => {
                 this.setState({
                     pollution: response.data.data[0].indexes[0],
@@ -24,7 +24,9 @@ class App extends Component {
                     temperature: response.data.data[0].values[5]
                 })
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     componentDidMount() {
@@ -33,14 +35,14 @@ class App extends Component {
         this.fetchData();
 
         io.on('msg', data => {
-            if(data === 'newData') {
-                this.fetchData();
-            }
+            if(data === 'newData')
+                this.fetchData()
         });
 
-        io.on('connect_error', function() {
+        io.on('connect_error', () => {
             setTimeout(() => {
-                io.connect()},10000);
+                io.connect()
+            }, 10000)
         });
     }
 
