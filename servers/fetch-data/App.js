@@ -1,12 +1,11 @@
 const http = require('http');
 const fetch = require('node-fetch');
 const express = require('express');
-const app = express();
 const socketIO = require('socket.io');
 const MongoClient = require('mongodb').MongoClient;
+const app = express();
 const config = require('./config');
 
-// DO NOT CHANGE
 const DATABASE_URL = config.DATABASE_URL;
 const APP_HOSTNAME = config.APP_HOSTNAME;
 const APP_PORT = config.APP_PORT;
@@ -17,12 +16,11 @@ const API_LANG = config.API_LANG;
 const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on('connection', socket => {
-    io.emit('msg', 'connected');
+io.on('connection', () => {
+    io.emit('msg', 'newData');
 });
 
-// FETCH DATA FROM AN OUTSIDE API
-server.listen(APP_PORT, APP_HOSTNAME, () => {
+function fetchData() {
     fetch(`${API_BASE_URL}measurements/installation?installationId=${config.API_TRANSMITTER_ID}`, {
         method: 'GET',
         headers: {
@@ -37,7 +35,6 @@ server.listen(APP_PORT, APP_HOSTNAME, () => {
     .then(json => {
         let data = json.current;
 
-        //INSERT DATA INTO DATABASE
         MongoClient.connect(DATABASE_URL, (err, db) => {
             if (err) throw err;
             let dbo = db.db('pollution-warning-display-data');
@@ -46,5 +43,12 @@ server.listen(APP_PORT, APP_HOSTNAME, () => {
                 db.close();
             });
         });
-    });
+
+        io.emit('msg', 'newData');
+    })
+}
+
+io.listen(APP_PORT);
+server.listen(APP_PORT, APP_HOSTNAME, () => {
+    setInterval(fetchData, 1800000)
 });
