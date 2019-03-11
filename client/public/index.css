@@ -1,0 +1,50 @@
+.face-image img {
+    height: 480px;
+    width: 480px;
+    margin-top: 80px;
+    margin-bottom: 65px;
+}
+
+.desc h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 72px;
+    margin-bottom: 25px;
+}
+
+.advice h5 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 64px;
+    margin-bottom: 0;
+}
+
+.clock h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 240px;
+    letter-spacing: 20px;
+    margin-top: 80px;
+    margin-bottom: 0;
+}
+
+.date h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 96px;
+    margin-bottom: 110px;
+    letter-spacing: 3px;
+}
+
+.weather-values img {
+    height: 180px;
+    width: 180px;
+}
+
+.weather-values h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 72px;
+    margin-top: 40px;
+    margin-bottom: 0;
+}

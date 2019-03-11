@@ -4,6 +4,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
+const fs = require('fs');
 const config = require('./config');
 
 const DATABASE_URL = config.DATABASE_URL;
@@ -29,27 +30,58 @@ function fetchData() {
             "apikey": API_KEY
         }
     })
-    .then(response => {
-        return response.json()
-    })
-    .then(json => {
-        let data = json.current;
+        .then(response => {
+            return response.json()
+        })
+        .then(json => {
+            let data = json;
 
-        MongoClient.connect(DATABASE_URL, (err, db) => {
-            if (err) throw err;
-            let dbo = db.db('pollution-warning-display-data');
+            MongoClient.connect(DATABASE_URL, { useNewUrlParser: true }, (err, db) => {
+                if (err) {
+                    fs.appendFile('./logs', `39: error: ${err} - ${Date.now()}\r\n`, (error) => {
+                        if(error)
+                            return console.log(error);
+                    });
+                    throw err;
+                }
 
-            dbo.collection('airlyData').insertOne(data, err => {
-                if (err) throw err;
-                db.close()
-            })
-        });
+                let dbo = db.db('pollution-warning-display-data');
 
-        io.emit('msg', 'newData')
-    })
+                dbo.collection('airlyData').insertOne(data, err => {
+                    if (err) {
+                        fs.appendFile('./logs', `49: error: ${err} - ${Date.now()}\r\n`, (error) => {
+                            if(error)
+                                return console.log(error);
+                        });
+                        throw err;
+                    }
+                    db.close();
+                    fs.appendFile('./logs', `58: Data succesfully inserted into MongoDB - ${Date.now()}\r\n`, (error) => {
+                        if(error)
+                            return console.log(error);
+                    });
+                })
+            });
+
+            io.emit('msg', 'newData')
+        })
 }
+
+process.on('unhandledRejection', (reason) => {
+    fs.appendFile('./logs', `69: unhandledRejection: ${reason} - ${Date.now()}\r\n`, (err) => {
+        if(err)
+            return console.log(err);
+    });
+});
+
+process.on('uncaughtException', (reason) => {
+    fs.appendFile('./logs', `76: uncaughtException: ${reason} - ${Date.now()}\r\n`, (err) => {
+        if(err)
+            return console.log(err);
+    });
+});
 
 io.listen(APP_PORT);
 server.listen(APP_PORT, APP_HOSTNAME, () => {
-    setInterval(fetchData, 1800000)
+    setInterval(fetchData, 60000)
 });
