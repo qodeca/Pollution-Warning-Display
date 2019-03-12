@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import socketIO from 'socket.io-client';
 
-import ClockComponent from './ClockComponent';
+import { ClockComponent } from './ClockComponent';
 import DateComponent from './DateComponent';
-import TemperatureDisplay from './TemperatureDisplay';
-import HumidityDisplay from "./HumidityDisplay";
-import PressureDisplay from "./PressureDisplay";
-import FaceImage from "./FaceImage";
-import Advice from "./Advice";
-import Description from "./Description";
+import { TemperatureDisplay } from './TemperatureDisplay';
+import { HumidityDisplay } from './HumidityDisplay';
+import { PressureDisplay } from './PressureDisplay';
+import FaceImage from './FaceImage';
+import { Advice } from './Advice';
+import { Description } from './Description';
+import { Copyrights } from './Copyrights';
 
 const roundTo = require('round-to');
 
-class App extends Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
 
@@ -64,15 +65,15 @@ class App extends Component {
     render() {
         return (
             <div id="App">
-                <FaceImage pollutionValue={ this.state.pollutionValue } />
-
-                <Description desc={ this.state.pollutionDesc } />
-                <Advice advice={ this.state.pollutionAdvice } />
-
-                <ClockComponent />
-                <DateComponent />
-
                 <div className="container text-center">
+                    <FaceImage pollutionValue={ this.state.pollutionValue } />
+
+                    <Description desc={ this.state.pollutionDesc } />
+                    <Advice advice={ this.state.pollutionAdvice } />
+
+                    <ClockComponent />
+                    <DateComponent />
+
                     <div className="row">
                         <div className="col-4">
                             <TemperatureDisplay currentTemperature={ this.state.temperature } />
@@ -84,10 +85,10 @@ class App extends Component {
                             <PressureDisplay currentPressure={ this.state.pressure } />
                         </div>
                     </div>
+
+                    <Copyrights />
                 </div>
             </div>
         );
     }
 }
-
-export default App;

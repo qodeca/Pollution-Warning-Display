@@ -1,7 +1,7 @@
 import React from 'react';
 import temperature from '../assets/temperature.png';
 
-const TemperatureDisplay = (props) => {
+export const TemperatureDisplay = props => {
     return(
         <div className="weather-values">
             <img src={ temperature } className="img-fluid" alt="temperature" />
@@ -9,5 +9,3 @@ const TemperatureDisplay = (props) => {
         </div>
     );
 };
-
-export default TemperatureDisplay;

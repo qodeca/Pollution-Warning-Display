@@ -4,7 +4,7 @@ import 'moment/locale/pl';
 
 moment.locale('pl');
 
-class DateComponent extends Component {
+export default class DateComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -14,6 +14,7 @@ class DateComponent extends Component {
             year: moment().format('YYYY')
         };
     }
+
     componentDidMount() {
         setInterval(() => {
             this.setState({
@@ -21,18 +22,18 @@ class DateComponent extends Component {
                 month: moment().format('MMMM'),
                 year: moment().format('YYYY')
             })
-        }, 1000)
+        }, 1000);
     }
 
     render() {
         return (
-            <div className="date text-center">
-                <h4>
-                    {this.state.day} {this.state.month} {this.state.year}
-                </h4>
+            <div className="date">
+                <div className="row">
+                    <div className="col-12">
+                        <h4>{this.state.day} {this.state.month} {this.state.year}</h4>
+                    </div>
+                </div>
             </div>
         );
     }
 }
-
-export default DateComponent;

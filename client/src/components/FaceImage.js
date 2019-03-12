@@ -4,28 +4,38 @@ import happyFace from '../assets/happy-face.png';
 import neutralFace from '../assets/neutral-face.png';
 import sadFace from '../assets/sad-face.png';
 
-class FaceImage extends Component {
+export default class FaceImage extends Component {
     render() {
         if (this.props.pollutionValue <= 50)
             return (
                 <div className="face-image">
-                    <img src={ happyFace } className="mx-auto d-block" alt="happy-face"/>
+                    <div className="row">
+                        <div className="col-12">
+                            <img src={ happyFace } className="mx-auto d-block" alt="happy-face" />
+                        </div>
+                    </div>
                 </div>
             );
 
         if (this.props.pollutionValue <= 70)
             return (
                 <div className="face-image">
-                    <img src={ neutralFace } className="mx-auto d-block" alt="neutral-face"/>
+                    <div className="row">
+                        <div className="col-12">
+                            <img src={ neutralFace } className="mx-auto d-block" alt="neutral-face" />
+                        </div>
+                    </div>
                 </div>
             );
 
         return (
             <div className="face-image">
-                <img src={ sadFace } className="mx-auto d-block" alt="sad-face"/>
+                <div className="row">
+                    <div className="col-12">
+                        <img src={ sadFace } className="mx-auto d-block" alt="sad-face" />
+                    </div>
+                </div>
             </div>
         )
     }
 }
-
-export default FaceImage;

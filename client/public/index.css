@@ -48,3 +48,19 @@
     margin-top: 40px;
     margin-bottom: 0;
 }
+
+.copyrights h5 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    margin-top: 160px;
+    margin-bottom: 20px;
+}
+
+.copyrights svg {
+    height: 20px;
+    margin-top: -4px;
+}
+
+#credits a {
+    display: none;
+}

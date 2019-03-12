@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Clock from 'react-live-clock';
 
-export default class ClockComponent extends Component {
-
-    render() {
-        return(
-            <div className="clock text-center">
-                <h4><Clock format={'HH:mm'} ticking={true} timezone={'CET'} /></h4>
+export const ClockComponent = () => {
+    return(
+        <div className="clock">
+            <div className="row">
+                <div className="col-12">
+                    <h4><Clock format={ 'HH:mm' } ticking={ true } timezone={ 'CET' } /></h4>
+                </div>
             </div>
-        )
-    }
-}
+        </div>
+    );
+};

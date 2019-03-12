@@ -5,5 +5,6 @@ module.exports = {
     API_KEY: 'YOUR_API_KEY',
     API_BASE_URL: 'https://airapi.airly.eu/v2/',
     API_LANG: 'pl',
+    FETCH_INTERVAL: '600000',
     API_TRANSMITTER_ID: '2546'
 };

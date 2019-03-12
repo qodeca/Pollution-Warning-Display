@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Description = (props) => {
+export const Description = props => {
     return(
-        <div className="desc text-center">
-            <h4>{ props.desc}</h4>
+        <div className="desc">
+            <div className="row">
+                <div className="col-12">
+                    <h4>{ props.desc}</h4>
+                </div>
+            </div>
         </div>
     );
 };
-
-export default Description;
