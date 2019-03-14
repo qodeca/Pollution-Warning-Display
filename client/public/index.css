@@ -1,3 +1,7 @@
+.face-image {
+    height: 625px;
+}
+
 .face-image img {
     height: 480px;
     width: 480px;
@@ -5,11 +9,19 @@
     margin-bottom: 65px;
 }
 
+.desc {
+    height: 84px;
+}
+
 .desc h4 {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 72px;
     margin-bottom: 25px;
+}
+
+.advice {
+    height: 250px;
 }
 
 .advice h5 {
@@ -34,6 +46,10 @@
     font-size: 96px;
     margin-bottom: 110px;
     letter-spacing: 3px;
+}
+
+.weather-values {
+    height: 307px;
 }
 
 .weather-values img {
@@ -63,4 +79,13 @@
 
 #credits a {
     display: none;
+}
+
+.animate {
+    opacity: 1;
+    transition-duration: 1000ms;
+}
+
+.animate.hide {
+    opacity: 0;
 }

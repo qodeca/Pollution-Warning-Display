@@ -12,17 +12,21 @@ export default class DateComponent extends Component {
             day: moment().format('D'),
             month: moment().format('MMMM'),
             year: moment().format('YYYY')
-        };
+        }
     }
 
     componentDidMount() {
-        setInterval(() => {
+        this.getCurrentDate = setInterval(() => {
             this.setState({
                 day: moment().format('D'),
                 month: moment().format('MMMM'),
                 year: moment().format('YYYY')
             })
-        }, 1000);
+        }, 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.getCurrentDate)
     }
 
     render() {

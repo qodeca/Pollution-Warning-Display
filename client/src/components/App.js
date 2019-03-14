@@ -4,12 +4,12 @@ import socketIO from 'socket.io-client';
 
 import { ClockComponent } from './ClockComponent';
 import DateComponent from './DateComponent';
-import { TemperatureDisplay } from './TemperatureDisplay';
-import { HumidityDisplay } from './HumidityDisplay';
-import { PressureDisplay } from './PressureDisplay';
+import TemperatureDisplay from './TemperatureDisplay';
+import HumidityDisplay from './HumidityDisplay';
+import PressureDisplay from './PressureDisplay';
 import FaceImage from './FaceImage';
-import { Advice } from './Advice';
-import { Description } from './Description';
+import Advice from './Advice';
+import Description from './Description';
 import { Copyrights } from './Copyrights';
 
 const roundTo = require('round-to');
@@ -19,8 +19,8 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            pollutionDesc: "",
-            pollutionAdvice: "",
+            pollutionDesc: '',
+            pollutionAdvice: '',
             pollutionValue: null,
             pressure: null,
             humidity: null,
