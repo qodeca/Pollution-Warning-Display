@@ -11,5 +11,9 @@
 /servers/fetch-data/build/*
 /servers/serve-data/build/*
 
+#logs
+/servers/serve-data/logs
+/servers/fetch-data/logs
+
 # ide
 /.idea/*

@@ -43,9 +43,8 @@ function fetchData() {
                     db.close();
                 })
             });
-
-            io.emit('msg', 'newData');
-        });
+        })
+        .then(io.emit('msg', 'newData'));
 
     setTimeout(fetchData, config.FETCH_INTERVAL);
 }

@@ -29,20 +29,22 @@ export default class App extends Component {
     }
 
     fetchData() {
-        axios.get('http://localhost:3001/api', { timeout: 30000 })
-            .then(response => {
-                this.setState({
-                    pollutionDesc: response.data.data[0].indexes[0].description,
-                    pollutionAdvice: response.data.data[0].indexes[0].advice,
-                    pollutionValue: roundTo(parseFloat(response.data.data[0].indexes[0].value), 0),
-                    pressure: roundTo(parseFloat(response.data.data[0].values[3].value), 0),
-                    humidity: roundTo(parseFloat(response.data.data[0].values[4].value), 0),
-                    temperature: roundTo(parseFloat(response.data.data[0].values[5].value), 0)
+        setTimeout(() => {
+            axios.get('http://localhost:3001/api', { timeout: 30000 })
+                .then(response => {
+                    this.setState({
+                        pollutionDesc: response.data.data[0].indexes[0].description,
+                        pollutionAdvice: response.data.data[0].indexes[0].advice,
+                        pollutionValue: roundTo(parseFloat(response.data.data[0].indexes[0].value), 0),
+                        pressure: roundTo(parseFloat(response.data.data[0].values[3].value), 0),
+                        humidity: roundTo(parseFloat(response.data.data[0].values[4].value), 0),
+                        temperature: roundTo(parseFloat(response.data.data[0].values[5].value), 0)
+                    })
                 })
-            })
-            .catch(err => {
-                console.log(err)
-            });
+                .catch(err => {
+                    console.log(err)
+                });
+        }, 1000);
     }
 
     componentDidMount() {
