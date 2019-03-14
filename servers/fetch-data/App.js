@@ -11,7 +11,7 @@ const log = require('./logErrors');
 const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on('connection', () => io.emit('msg', 'newData'));
+io.on('connection', socket => socket.emit('msg', 'newData'));
 
 function fetchData() {
     fetch(`${config.API_BASE_URL}measurements/installation?installationId=${config.API_TRANSMITTER_ID}`, {

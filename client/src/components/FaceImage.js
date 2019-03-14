@@ -14,7 +14,7 @@ export default class FaceImage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.pollutionValue !== this.props.pollutionValue) {
+        if(nextProps.pollutionLevel !== this.props.pollutionLevel) {
             this.setState({
                 animate: 'mx-auto d-block animate hide'
             });
@@ -28,7 +28,7 @@ export default class FaceImage extends Component {
     }
 
     render() {
-        if (this.props.pollutionValue <= 50)
+        if(this.props.pollutionValue <= 50)
             return (
                 <div className="face-image">
                     <div className="row">
@@ -39,7 +39,7 @@ export default class FaceImage extends Component {
                 </div>
             );
 
-        if (this.props.pollutionValue <= 70)
+        if(this.props.pollutionValue <= 70)
             return (
                 <div className="face-image">
                     <div className="row">

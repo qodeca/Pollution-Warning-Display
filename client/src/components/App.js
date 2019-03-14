@@ -35,6 +35,7 @@ export default class App extends Component {
                     this.setState({
                         pollutionDesc: response.data.data[0].indexes[0].description,
                         pollutionAdvice: response.data.data[0].indexes[0].advice,
+                        pollutionLevel: response.data.data[0].indexes[0].level,
                         pollutionValue: roundTo(parseFloat(response.data.data[0].indexes[0].value), 0),
                         pressure: roundTo(parseFloat(response.data.data[0].values[3].value), 0),
                         humidity: roundTo(parseFloat(response.data.data[0].values[4].value), 0),
@@ -43,18 +44,17 @@ export default class App extends Component {
                 })
                 .catch(err => {
                     console.log(err)
-                });
-        }, 2000);
+                })
+        }, 2000)
     }
 
     componentDidMount() {
         let io = socketIO('http://127.0.0.1:3002');
 
-        this.fetchData();
-
         io.on('msg', data => {
             if(data === 'newData')
-                this.fetchData()
+                this.fetchData();
+                console.log(data)
         });
 
         io.on('connect_error', () => {
@@ -68,7 +68,7 @@ export default class App extends Component {
         return (
             <div id="App">
                 <div className="container text-center">
-                    <FaceImage pollutionValue={ this.state.pollutionValue } />
+                    <FaceImage pollutionValue={ this.state.pollutionValue } pollutionLevel={ this.state.pollutionLevel } />
 
                     <Description desc={ this.state.pollutionDesc } />
                     <Advice advice={ this.state.pollutionAdvice } />
