@@ -30,7 +30,7 @@ export default class App extends Component {
 
     fetchData() {
         setTimeout(() => {
-            axios.get('http://localhost:3001/api', { timeout: 30000 })
+            axios.get('http://localhost:3001/api')
                 .then(response => {
                     this.setState({
                         pollutionDesc: response.data.data[0].indexes[0].description,
@@ -44,7 +44,7 @@ export default class App extends Component {
                 .catch(err => {
                     console.log(err)
                 });
-        }, 1000);
+        }, 2000);
     }
 
     componentDidMount() {
