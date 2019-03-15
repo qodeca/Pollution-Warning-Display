@@ -8,7 +8,7 @@ export default class HumidityDisplay extends Component {
         this.state = {
             animate: 'animate',
             text: ''
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -21,8 +21,8 @@ export default class HumidityDisplay extends Component {
                 this.setState({
                     animate: 'animate',
                     text: nextProps.currentHumidity + '%'
-                })
-            },1000)
+                });
+            },1000);
         }
     }
 
@@ -32,6 +32,6 @@ export default class HumidityDisplay extends Component {
                 <img src={ humidity } className="img-fluid" alt="humidity" />
                 <h4 className={ this.state.animate }>{ this.state.text }</h4>
             </div>
-        )
+        );
     }
 }

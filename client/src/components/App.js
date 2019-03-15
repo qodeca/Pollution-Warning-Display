@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import socketIO from 'socket.io-client';
 
+import { Logo } from './Logo';
 import { ClockComponent } from './ClockComponent';
 import DateComponent from './DateComponent';
 import TemperatureDisplay from './TemperatureDisplay';
@@ -10,7 +11,7 @@ import PressureDisplay from './PressureDisplay';
 import FaceImage from './FaceImage';
 import Advice from './Advice';
 import Description from './Description';
-import { Copyrights } from './Copyrights';
+import { Footer } from './Footer';
 
 const roundTo = require('round-to');
 
@@ -40,12 +41,12 @@ export default class App extends Component {
                         pressure: roundTo(parseFloat(response.data.data[0].values[3].value), 0),
                         humidity: roundTo(parseFloat(response.data.data[0].values[4].value), 0),
                         temperature: roundTo(parseFloat(response.data.data[0].values[5].value), 0)
-                    })
+                    });
                 })
                 .catch(err => {
-                    console.log(err)
+                    console.log(err);
                 })
-        }, 2000)
+        }, 2000);
     }
 
     componentDidMount() {
@@ -54,13 +55,12 @@ export default class App extends Component {
         io.on('msg', data => {
             if(data === 'newData')
                 this.fetchData();
-                console.log(data)
         });
 
         io.on('connect_error', () => {
             setTimeout(() => {
-                io.connect()
-            }, 10000)
+                io.connect();
+            }, 10000);
         });
     }
 
@@ -68,6 +68,8 @@ export default class App extends Component {
         return (
             <div id="App">
                 <div className="container text-center">
+                    <Logo />
+
                     <FaceImage pollutionValue={ this.state.pollutionValue } pollutionLevel={ this.state.pollutionLevel } />
 
                     <Description desc={ this.state.pollutionDesc } />
@@ -88,7 +90,7 @@ export default class App extends Component {
                         </div>
                     </div>
 
-                    <Copyrights />
+                    <Footer />
                 </div>
             </div>
         );

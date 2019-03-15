@@ -1,14 +1,16 @@
 #Pollution-Warning-Display
-Pollution Warning Display is an open source application that informs Grójec dwellers about actual air pollution, date, time, temperature, humidity and pressure in the City center.
-
+Pollution Warning Display is an open source application that informs Grójec
+dwellers about actual air pollution, date, time, temperature, humidity and
+pressure in the City center.
+##Requirements
+**npm** version: **^6.4.1**<br/>
+**node** version **^10.15.2**<br/>
+**mongodb** version **^3.1.13**
 ##Installation
 To install Pollution Warning Display you have to clone the repository first:
 ```bash
 git clone https://github.com/qodeca/Pollution-Warning-Display.git
 ```
-
-<br/>
-
 After cloning remember to run:
 ```bash
 npm install
@@ -21,7 +23,6 @@ Pollution-Warning-Display
         |--> fetch-data => RUN HERE
         |--> serve-data => RUN HERE
 ```
-
 ##Configuration
 There are two configuration files:
 ```bash
@@ -35,9 +36,8 @@ Pollution-Warning-Display
 ```
 To make an app work you have to set up both of existing configuration files
 unless you want to run it with default settings. **Remember to paste a valid
-API key into the first configuration file** If you don't
+API key into the first configuration file.** If you don't
 have any airly API key you can get one [here](https://developer.airly.eu/docs).
-
 ##Usage
 To start application you have to run
 ```bash
@@ -51,7 +51,6 @@ Pollution-Warning-Display
         |--> fetch-data => RUN HERE
         |--> serve-data => RUN HERE
 ```
-
 ##License
 Copyright 2019 Qodeca
 

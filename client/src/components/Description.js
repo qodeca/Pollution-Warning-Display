@@ -5,23 +5,23 @@ export default class Description extends Component {
         super(props);
 
         this.state = {
-            animate: 'animate',
+            animate: 'animate-2',
             text: ''
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.desc !== this.props.desc) {
             this.setState({
-                animate: 'animate hide'
+                animate: 'animate-2 hide-2'
             });
 
             setTimeout(() => {
                 this.setState({
                     text: nextProps.desc,
-                    animate: 'animate'
-                })
-            },1000)
+                    animate: 'animate-2'
+                });
+            },1000);
         }
     }
 
@@ -34,6 +34,6 @@ export default class Description extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }

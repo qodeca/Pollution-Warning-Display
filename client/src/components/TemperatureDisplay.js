@@ -8,7 +8,7 @@ export default class TemperatureDisplay extends Component {
         this.state = {
             animate: 'animate',
             text: ''
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -21,8 +21,8 @@ export default class TemperatureDisplay extends Component {
                 this.setState({
                     animate: 'animate',
                     text: nextProps.currentTemperature + '°C'
-                })
-            },1000)
+                });
+            },1000);
         }
     }
 
@@ -32,6 +32,6 @@ export default class TemperatureDisplay extends Component {
                 <img src={ temperature } className="img-fluid" alt="temperature" />
                 <h4 className={ this.state.animate }>{ this.state.text }</h4>
             </div>
-        )
+        );
     }
 };

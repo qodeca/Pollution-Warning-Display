@@ -5,7 +5,7 @@ export default class Advice extends Component {
         super(props);
 
         this.state = {
-            animate: 'animate',
+            animate: 'animate-2',
             text: ''
         }
     }
@@ -13,15 +13,15 @@ export default class Advice extends Component {
     componentWillReceiveProps(nextProps) {
         if(nextProps.advice !== this.props.advice) {
             this.setState({
-                animate: 'animate hide'
+                animate: 'animate-2 hide-2'
             });
 
             setTimeout(() => {
                 this.setState({
                     text: nextProps.advice,
-                    animate: 'animate'
-                })
-            },1000)
+                    animate: 'animate-2'
+                });
+            },1000);
         }
     }
 
@@ -34,6 +34,6 @@ export default class Advice extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }

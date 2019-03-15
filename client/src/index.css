@@ -1,0 +1,93 @@
+.logo img {
+    margin-top: 100px;
+}
+
+.face-image img {
+    height: 600px;
+    width: 600px;
+    margin-top: 120px;
+    margin-bottom: 40px;
+}
+
+.desc h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 108px;
+}
+
+.advice h5 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 72px;
+    margin-top: 10px;
+}
+
+.clock h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 340px;
+    letter-spacing: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.date h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 108px;
+    margin-bottom: 60px;
+    letter-spacing: 3px;
+}
+
+.weather-values {
+    margin-top: 20px;
+}
+
+.weather-values img {
+    height: 220px;
+    width: 220px;
+}
+
+.weather-values h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 92px;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.footer {
+    margin-top: 40px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+}
+
+.footer svg {
+    margin-top: -4px;
+    height: 22px;
+}
+
+#credits a {
+    display: none;
+}
+
+.animate {
+    opacity: 1;
+    transition-duration: 1000ms;
+}
+
+.animate.hide {
+    opacity: 0;
+}
+
+.animate-2 {
+    opacity: 1;
+    transition-duration: 500ms;
+    max-height: 850px;
+}
+
+.animate-2.hide-2 {
+    max-height: 95px;
+    opacity: 0;
+}

@@ -10,7 +10,7 @@ export default class FaceImage extends Component {
 
         this.state = {
             animate: 'animate'
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -22,8 +22,8 @@ export default class FaceImage extends Component {
             setTimeout(() => {
                 this.setState({
                     animate: 'mx-auto d-block animate'
-                })
-            },1000)
+                });
+            },1000);
         }
     }
 

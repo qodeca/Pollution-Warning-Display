@@ -12,7 +12,7 @@ export default class DateComponent extends Component {
             day: moment().format('D'),
             month: moment().format('MMMM'),
             year: moment().format('YYYY')
-        }
+        };
     }
 
     componentDidMount() {
@@ -21,12 +21,12 @@ export default class DateComponent extends Component {
                 day: moment().format('D'),
                 month: moment().format('MMMM'),
                 year: moment().format('YYYY')
-            })
-        }, 1000)
+            });
+        }, 1000);
     }
 
     componentWillUnmount() {
-        clearInterval(this.getCurrentDate)
+        clearInterval(this.getCurrentDate);
     }
 
     render() {
@@ -34,7 +34,7 @@ export default class DateComponent extends Component {
             <div className="date">
                 <div className="row">
                     <div className="col-12">
-                        <h4>{this.state.day} {this.state.month} {this.state.year}</h4>
+                        <h4>{ this.state.day } { this.state.month } { this.state.year }</h4>
                     </div>
                 </div>
             </div>
