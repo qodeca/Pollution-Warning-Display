@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import humidity from '../assets/humidity.png';
+import humidity from '../../assets/humidity.png';
 
 export default class HumidityDisplay extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            animate: 'animate',
-            text: ''
+            animate: ''
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.currentHumidity !== this.props.currentHumidity) {
             this.setState({
-                animate: 'animate hide'
+                animate: 'hide'
             });
 
             setTimeout(() => {
                 this.setState({
-                    animate: 'animate',
-                    text: nextProps.currentHumidity + '%'
+                    animate: ''
                 });
             },1000);
         }
@@ -30,7 +28,7 @@ export default class HumidityDisplay extends Component {
         return(
             <div className="weather-values">
                 <img src={ humidity } className="img-fluid" alt="humidity" />
-                <h4 className={ this.state.animate }>{ this.state.text }</h4>
+                <h4 className={ `animate ${ this.state.animate }` }>{ this.props.currentHumidity }%</h4>
             </div>
         );
     }

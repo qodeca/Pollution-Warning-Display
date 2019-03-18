@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import temperature from '../assets/temperature.png';
+import temperature from '../../assets/temperature.png';
 
 export default class TemperatureDisplay extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            animate: 'animate',
-            text: ''
+            animate: ''
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.currentTemperature !== this.props.currentTemperature) {
             this.setState({
-                animate: 'animate hide'
+                animate: 'hide'
             });
 
             setTimeout(() => {
                 this.setState({
-                    animate: 'animate',
-                    text: nextProps.currentTemperature + '°C'
+                    animate: ''
                 });
             },1000);
         }
@@ -30,7 +28,7 @@ export default class TemperatureDisplay extends Component {
         return(
             <div className="weather-values">
                 <img src={ temperature } className="img-fluid" alt="temperature" />
-                <h4 className={ this.state.animate }>{ this.state.text }</h4>
+                <h4 className={ `animate ${ this.state.animate }` }>{ this.props.currentTemperature }°C</h4>
             </div>
         );
     }

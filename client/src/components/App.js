@@ -1,50 +1,24 @@
 import React, { Component } from 'react';
+import { Router, Route } from 'react-router-dom';
+
+import PollutionWarningDisplay from './pollution-warning-display/PollutionWarningDisplay';
+import Advertisement from './advertisement/Advertisement';
+import history from '../history';
 import axios from 'axios';
 import socketIO from 'socket.io-client';
+import { connect } from 'react-redux';
+import { pollutionData } from '../actions';
+import Loading from "./Loading";
 
-import { Logo } from './Logo';
-import { ClockComponent } from './ClockComponent';
-import DateComponent from './DateComponent';
-import TemperatureDisplay from './TemperatureDisplay';
-import HumidityDisplay from './HumidityDisplay';
-import PressureDisplay from './PressureDisplay';
-import FaceImage from './FaceImage';
-import Advice from './Advice';
-import Description from './Description';
-import { Footer } from './Footer';
-
-const roundTo = require('round-to');
-
-export default class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            pollutionDesc: '',
-            pollutionAdvice: '',
-            pollutionValue: null,
-            pressure: null,
-            humidity: null,
-            temperature: null
-        }
-    }
-
+class App extends Component {
     fetchData() {
         setTimeout(() => {
             axios.get('http://localhost:3001/api')
                 .then(response => {
-                    this.setState({
-                        pollutionDesc: response.data.data[0].indexes[0].description,
-                        pollutionAdvice: response.data.data[0].indexes[0].advice,
-                        pollutionLevel: response.data.data[0].indexes[0].level,
-                        pollutionValue: roundTo(parseFloat(response.data.data[0].indexes[0].value), 0),
-                        pressure: roundTo(parseFloat(response.data.data[0].values[3].value), 0),
-                        humidity: roundTo(parseFloat(response.data.data[0].values[4].value), 0),
-                        temperature: roundTo(parseFloat(response.data.data[0].values[5].value), 0)
-                    });
+                    this.props.pollutionData(response.data.data[0]);
                 })
                 .catch(err => {
-                    console.log(err);
+                    console.log(err)
                 })
         }, 2000);
     }
@@ -54,45 +28,31 @@ export default class App extends Component {
 
         io.on('msg', data => {
             if(data === 'newData')
-                this.fetchData();
+                this.fetchData()
         });
 
         io.on('connect_error', () => {
             setTimeout(() => {
-                io.connect();
-            }, 10000);
+                io.connect()
+            }, 10000)
         });
     }
 
     render() {
         return (
             <div id="App">
-                <div className="container text-center">
-                    <Logo />
-
-                    <FaceImage pollutionValue={ this.state.pollutionValue } pollutionLevel={ this.state.pollutionLevel } />
-
-                    <Description desc={ this.state.pollutionDesc } />
-                    <Advice advice={ this.state.pollutionAdvice } />
-
-                    <ClockComponent />
-                    <DateComponent />
-
-                    <div className="row">
-                        <div className="col-4">
-                            <TemperatureDisplay currentTemperature={ this.state.temperature } />
-                        </div>
-                        <div className="col-4">
-                            <HumidityDisplay currentHumidity={ this.state.humidity } />
-                        </div>
-                        <div className="col-4">
-                            <PressureDisplay currentPressure={ this.state.pressure } />
-                        </div>
-                    </div>
-
-                    <Footer />
-                </div>
+                <Router history={ history }>
+                    <Route exact path="/" component={ Loading } />
+                    <Route exact path="/pollution-warning-display" component={ PollutionWarningDisplay } />
+                    <Route exact path="/advertisement" component={ Advertisement } />
+                </Router>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps, { pollutionData })(App);

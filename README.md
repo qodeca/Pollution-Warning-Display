@@ -37,7 +37,7 @@ Pollution-Warning-Display
 ```
 To make an app work you have to set up both of existing configuration files
 unless you want to run it with default settings. **Remember to paste a valid
-API key into the first configuration file** If you don't
+API key into the first configuration file.** If you don't
 have any airly API key you can get one [here](https://developer.airly.eu/docs).
 
 ## Usage

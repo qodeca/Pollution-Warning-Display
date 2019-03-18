@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 
-export default class Description extends Component {
+export default class Advice extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            animate: 'animate-2',
-            text: ''
+            animate: '',
+            text: this.props.advice
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.desc !== this.props.desc) {
+        if(nextProps.advice !== this.props.advice) {
             this.setState({
-                animate: 'animate-2 hide-2'
+                animate: 'hide-2'
             });
 
             setTimeout(() => {
                 this.setState({
-                    text: nextProps.desc,
-                    animate: 'animate-2'
+                    animate: '',
+                    text: nextProps.advice
                 });
             },1000);
         }
@@ -27,10 +27,12 @@ export default class Description extends Component {
 
     render() {
         return(
-            <div className="desc">
+            <div className="advice">
                 <div className="row">
                     <div className="col-12">
-                        <h4 className={ this.state.animate }>{ this.state.text }</h4>
+                        <h5 className={ `animate-2 ${ this.state.animate }` }>
+                            { this.state.text }
+                        </h5>
                     </div>
                 </div>
             </div>
