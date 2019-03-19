@@ -1,28 +1,50 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class Advice extends Component {
+class Advice extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             animate: '',
-            text: this.props.advice
+            text: this.props.data.indexes[0].advice
         };
     }
 
+    setTimer = nextProps => {
+        if (this.timerHandle)
+            return;
+
+        this.timerHandle = setTimeout(() => {
+            this.setState({
+                animate: '',
+                text: nextProps.data.indexes[0].advice
+            });
+            this.timerHandle = 0;
+        }, 1000);
+    };
+
+    clearTimer = () => {
+        if (this.timerHandle) {
+            clearTimeout(this.timerHandle);
+            this.timerHandle = 0;
+            this.setState({
+                animate: ''
+            });
+        }
+    };
+
     componentWillReceiveProps(nextProps) {
-        if(nextProps.advice !== this.props.advice) {
+        if(nextProps !== this.props) {
             this.setState({
                 animate: 'hide-2'
             });
 
-            setTimeout(() => {
-                this.setState({
-                    animate: '',
-                    text: nextProps.advice
-                });
-            },1000);
+            this.setTimer(nextProps);
         }
+    }
+
+    componentWillUnmount() {
+        this.clearTimer();
     }
 
     render() {
@@ -39,3 +61,7 @@ export default class Advice extends Component {
         );
     }
 }
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(Advice);

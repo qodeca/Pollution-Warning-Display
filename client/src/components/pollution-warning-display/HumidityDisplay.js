@@ -1,35 +1,69 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import humidity from '../../assets/humidity.png';
 
-export default class HumidityDisplay extends Component {
+const roundTo = require('round-to');
+
+class HumidityDisplay extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            animate: ''
+            animate: '',
+            value: roundTo(parseFloat(this.props.data.values[4].value), 0)
         };
     }
 
+    setTimer = nextProps => {
+        if (this.timerHandle)
+            return;
+
+        this.timerHandle = setTimeout(() => {
+            this.setState({
+                animate: '',
+                value: roundTo(parseFloat(nextProps.data.values[4].value), 0)
+            });
+            this.timerHandle = 0;
+        }, 1000);
+    };
+
+    clearTimer = () => {
+        if (this.timerHandle) {
+            clearTimeout(this.timerHandle);
+            this.timerHandle = 0;
+            this.setState({
+                animate: ''
+            });
+        }
+    };
+
     componentWillReceiveProps(nextProps) {
-        if(nextProps.currentHumidity !== this.props.currentHumidity) {
+        if(roundTo(parseFloat(nextProps.data.values[4].value), 0) !== this.state.value) {
             this.setState({
                 animate: 'hide'
             });
 
-            setTimeout(() => {
-                this.setState({
-                    animate: ''
-                });
-            },1000);
+            this.setTimer(nextProps);
         }
+    }
+
+    componentWillUnmount() {
+        this.clearTimer();
     }
 
     render() {
         return(
             <div className="weather-values">
                 <img src={ humidity } className="img-fluid" alt="humidity" />
-                <h4 className={ `animate ${ this.state.animate }` }>{ this.props.currentHumidity }%</h4>
+                <h4 className={ `animate ${ this.state.animate }` }>
+                    { this.state.value }%
+                </h4>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(HumidityDisplay);

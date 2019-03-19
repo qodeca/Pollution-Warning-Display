@@ -21,11 +21,11 @@ class Advertisement extends Component {
             this.setState({
                 visibility: ''
             })
-        },14500);
+        },9500);
 
         setTimeout(() => {
             this.props.history.push('/pollution-warning-display')
-        }, 15000);
+        }, 10000);
     }
 
     render() {

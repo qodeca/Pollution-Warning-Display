@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { pollutionData } from '../actions';
-
 class Loading extends Component {
     componentWillReceiveProps(nextProps) {
         this.props.history.push('/pollution-warning-display')
@@ -11,8 +9,10 @@ class Loading extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Loading...</h1>
+            <div className="loading text-center">
+                <div className="spinner-grow mt-6" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
             </div>
         );
     }
@@ -20,4 +20,4 @@ class Loading extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { pollutionData })(withRouter(Loading));
+export default connect(mapStateToProps)(withRouter(Loading));

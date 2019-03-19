@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 
+import Loading from './Loading';
 import PollutionWarningDisplay from './pollution-warning-display/PollutionWarningDisplay';
 import Advertisement from './advertisement/Advertisement';
 import history from '../history';
@@ -8,7 +9,6 @@ import axios from 'axios';
 import socketIO from 'socket.io-client';
 import { connect } from 'react-redux';
 import { pollutionData } from '../actions';
-import Loading from "./Loading";
 
 class App extends Component {
     fetchData() {
