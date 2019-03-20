@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import pressure from '../../assets/pressure.png';
+import { mapStateToProps } from '../../functions';
 
 const roundTo = require('round-to');
 
@@ -44,7 +45,7 @@ class PressureDisplay extends Component {
                 animate: 'hide'
             });
 
-            this.setTimer();
+            this.setTimer(nextProps);
         }
     }
 
@@ -63,7 +64,5 @@ class PressureDisplay extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(PressureDisplay);

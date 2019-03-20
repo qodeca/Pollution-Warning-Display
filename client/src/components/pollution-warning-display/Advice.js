@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { mapStateToProps } from '../../functions';
 
 class Advice extends Component {
     constructor(props) {
@@ -61,7 +62,5 @@ class Advice extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(Advice);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import humidity from '../../assets/humidity.png';
+import { mapStateToProps } from '../../functions';
 
 const roundTo = require('round-to');
 
@@ -63,7 +64,5 @@ class HumidityDisplay extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(HumidityDisplay);

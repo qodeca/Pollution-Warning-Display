@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import temperature from '../../assets/temperature.png';
+import { mapStateToProps } from '../../functions';
 
 const roundTo = require('round-to');
 
@@ -63,7 +64,5 @@ class TemperatureDisplay extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(TemperatureDisplay);

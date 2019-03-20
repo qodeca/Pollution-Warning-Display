@@ -27,7 +27,7 @@ export default class PollutionWarningDisplay extends Component {
             })
         }, 500);
 
-        setTimeout(() =>{
+        setTimeout(() => {
             this.setState({
                 visibility: ''
             })
@@ -57,10 +57,10 @@ export default class PollutionWarningDisplay extends Component {
                             <TemperatureDisplay />
                         </div>
                         <div className="col-4">
-                            <HumidityDisplay />
+                            <PressureDisplay />
                         </div>
                         <div className="col-4">
-                            <PressureDisplay />
+                            <HumidityDisplay />
                         </div>
                     </div>
                     <Footer />

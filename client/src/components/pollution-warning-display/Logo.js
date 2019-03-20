@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LogoSrc from '../../assets/logo-qodeca.png';
 
 export const Logo = () => {

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import happyFace from '../../assets/happy-face.png';
 import neutralFace from '../../assets/neutral-face.png';
 import sadFace from '../../assets/sad-face.png';
+import { mapStateToProps } from '../../functions';
 
 const roundTo = require('round-to');
 
@@ -102,7 +103,5 @@ class FaceImage extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(FaceImage);

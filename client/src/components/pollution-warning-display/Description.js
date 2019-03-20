@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { mapStateToProps } from '../../functions';
+
 class Description extends Component {
     constructor(props) {
         super(props);
@@ -61,7 +63,5 @@ class Description extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(Description);
