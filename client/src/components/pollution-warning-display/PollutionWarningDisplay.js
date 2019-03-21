@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Logo } from './Logo';
 import { ClockComponent } from './ClockComponent';
@@ -10,8 +11,9 @@ import FaceImage from './FaceImage';
 import Advice from './Advice';
 import Description from './Description';
 import { Footer } from './Footer';
+import { mapStateToProps } from '../../functions';
 
-export default class PollutionWarningDisplay extends Component {
+class PollutionWarningDisplay extends Component {
     constructor(props) {
         super(props);
 
@@ -27,15 +29,19 @@ export default class PollutionWarningDisplay extends Component {
             })
         }, 500);
 
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
             this.setState({
                 visibility: ''
             })
-        }, 59500);
+        }, this.props.infoTime - 500);
 
         setTimeout(() => {
             this.props.history.push('/advertisement')
-        }, 60000);
+        }, this.props.infoTime);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
     }
 
     render() {
@@ -69,3 +75,5 @@ export default class PollutionWarningDisplay extends Component {
         );
     }
 }
+
+export default connect(mapStateToProps)(PollutionWarningDisplay);

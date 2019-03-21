@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
+import axios from 'axios';
+import socketIO from 'socket.io-client';
+import { connect } from 'react-redux';
 
 import Loading from './Loading';
 import PollutionWarningDisplay from './pollution-warning-display/PollutionWarningDisplay';
 import Advertisement from './advertisement/Advertisement';
 import history from '../history';
-import axios from 'axios';
-import socketIO from 'socket.io-client';
-import { connect } from 'react-redux';
-import { pollutionData } from '../actions';
+import { pollutionData, advertisementsData } from '../actions';
+import { mapStateToProps } from '../functions';
+import Login from './login/Login';
+import Dashboard from './dashboard/Dashboard';
 
 class App extends Component {
-    fetchData() {
-        setTimeout(() => {
-            axios.get('http://localhost:3001/api')
-                .then(response => {
-                    this.props.pollutionData(response.data.data[0]);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }, 2000);
+    async fetchData() {
+        try {
+            const response = await axios.get('http://localhost:3001/api/airly-data');
+            this.props.pollutionData(response.data.data[0]);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async fetchAdvertisement() {
+        try {
+            const response = await axios.get('http://localhost:3001/api/advertisements');
+            this.props.advertisementsData(response.data.data);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     componentDidMount() {
         let io = socketIO('http://127.0.0.1:3002');
 
+        this.fetchAdvertisement();
+
         io.on('msg', data => {
-            if(data === 'newData')
-                this.fetchData()
+            if(data === 'newData') {
+                this.fetchData();
+            }
         });
 
         io.on('connect_error', () => {
@@ -45,14 +57,12 @@ class App extends Component {
                     <Route exact path="/" component={ Loading } />
                     <Route exact path="/pollution-warning-display" component={ PollutionWarningDisplay } />
                     <Route exact path="/advertisement" component={ Advertisement } />
+                    <Route exact path="/login" component={ Login } />
+                    <Route exact path="/dashboard" component={ Dashboard } />
                 </Router>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return state;
-};
-
-export default connect(mapStateToProps, { pollutionData })(App);
+export default connect(mapStateToProps, { pollutionData, advertisementsData })(App);

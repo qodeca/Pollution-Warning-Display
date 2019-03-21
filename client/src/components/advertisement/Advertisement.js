@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Logo} from "../pollution-warning-display/Logo";
+import { connect } from 'react-redux';
+
+import { Logo } from '../pollution-warning-display/Logo';
+import { mapStateToProps } from '../../functions';
 
 class Advertisement extends Component {
     constructor(props) {
@@ -16,26 +19,39 @@ class Advertisement extends Component {
             this.setState({
                 visibility: 'show'
             })
-        }, 500);
+        },500);
 
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
             this.setState({
                 visibility: ''
             })
-        }, 9500);
+        },this.props.adTime - 500);
 
         setTimeout(() => {
             this.props.history.push('/pollution-warning-display')
-        }, 10000);
+        }, this.props.adTime);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
     }
 
     render() {
+        if(this.props.ads.length === 0)
+            return(
+                <div>
+                    No ads yet!
+                </div>
+            );
+
         return(
             <div className={ `advertisement ${this.state.visibility}` }>
                 <div className="container text-center">
                     <div className="row">
                         <div className="col-12 text-center">
-                            <h3 className="mt-5">Advertisement</h3>
+                            <h3 className="mt-5">{ this.props.ads[this.props.selected].title }</h3>
+                            <h4>{ this.props.ads[0].description }</h4>
+                            { console.log(this.props.selected) }
                             <Logo />
                         </div>
                     </div>
@@ -45,4 +61,4 @@ class Advertisement extends Component {
     }
 }
 
-export default withRouter(Advertisement);
+export default connect(mapStateToProps)(withRouter(Advertisement));

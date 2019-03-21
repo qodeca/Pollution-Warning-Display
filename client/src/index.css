@@ -152,3 +152,10 @@
 #credits a {
     display: none;
 }
+
+/*
+* LOGIN
+*/
+.login {
+    margin-top: 35vh;
+}

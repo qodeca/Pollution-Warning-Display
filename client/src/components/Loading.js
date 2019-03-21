@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { mapStateToProps } from '../functions';
+
 class Loading extends Component {
     componentWillReceiveProps(nextProps) {
-        this.props.history.push('/pollution-warning-display')
+        if(nextProps.data !== this.props.data)
+            this.props.history.push('/pollution-warning-display')
     }
 
     render() {
@@ -17,7 +20,5 @@ class Loading extends Component {
         );
     }
 }
-
-const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(withRouter(Loading));
