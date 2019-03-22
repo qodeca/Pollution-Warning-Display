@@ -163,6 +163,6 @@
 /*
 * DASHBOARD
 */
-.delete-modal input {
+.hide-input input {
     display: none;
 }
