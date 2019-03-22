@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { selectedAdvertisement, timeToSkipAd, timeToSkipInfo } from '../../actions';
-import { mapStateToProps } from '../../functions';
-import AdsList from '../advertisement/AdsList';
+import { mapStateToProps }                                     from '../../functions';
+import AdsList                                                 from './AdsList';
 
 class Dashboard extends Component {
     render() {

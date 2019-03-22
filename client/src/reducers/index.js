@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const dataReducer = (state = {}, action) => {
+const dataReducer = (state = [], action) => {
     if(action.type === 'DATA')
         return action.payload;
 

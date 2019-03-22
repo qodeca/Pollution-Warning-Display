@@ -159,3 +159,10 @@
 .login {
     margin-top: 35vh;
 }
+
+/*
+* DASHBOARD
+*/
+.delete-modal input {
+    display: none;
+}

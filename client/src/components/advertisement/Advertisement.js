@@ -51,7 +51,6 @@ class Advertisement extends Component {
                         <div className="col-12 text-center">
                             <h3 className="mt-5">{ this.props.ads[this.props.selected].title }</h3>
                             <h4>{ this.props.ads[0].description }</h4>
-                            { console.log(this.props.selected) }
                             <Logo />
                         </div>
                     </div>

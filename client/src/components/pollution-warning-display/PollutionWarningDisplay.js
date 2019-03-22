@@ -45,7 +45,14 @@ class PollutionWarningDisplay extends Component {
     }
 
     render() {
-        return (
+        if(this.props.data.length === 0)
+            return(
+                <div>
+                    Loading...
+                </div>
+            );
+
+        return(
             <div className={ `pollution-warning-display ${ this.state.visibility }` }>
                 <div className="container text-center">
                     <Logo />

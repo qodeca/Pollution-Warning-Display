@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { selectedAdvertisement } from '../../actions';
-import { mapStateToProps } from "../../functions";
+import { mapStateToProps }       from '../../functions';
 
 class AdsList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
+
     render() {
         return this.props.ads.map((ad, index) => {
             return(
@@ -31,8 +48,25 @@ class AdsList extends Component {
                                 </div>
 
                                 <div className="col-md-auto">
-                                    <button type="button" className="btn btn-danger"><b>Usuń</b></button>
+                                    <button type="button" className="btn btn-danger" onClick={ this.toggle }><b>Usuń</b></button>
                                 </div>
+
+                                <Modal isOpen={ this.state.modal } toggle={ this.toggle } className="delete-modal">
+                                    <ModalHeader toggle={ this.toggle }>Uwaga!!!</ModalHeader>
+                                    <ModalBody>
+                                        <h5>Czy napewno chcesz usunąć wybrany post?</h5>
+                                        <br />
+                                        <h3>ID: { index }</h3>
+                                        <h5>Tytuł: { ad.title }</h5>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="primary" onClick={ this.toggle }>Nie, nie chcę usuwać postu</Button>
+                                        <form>
+                                            <input defaultValue={ ad._id } name="id" />
+                                            <button type="submit" className="btn btn-danger" onClick={ this.toggle }>Tak, usuń post</button>
+                                        </form>
+                                    </ModalFooter>
+                                </Modal>
                             </div>
                         </div>
                     </div>
