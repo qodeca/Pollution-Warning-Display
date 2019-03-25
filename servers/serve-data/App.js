@@ -12,7 +12,7 @@ app.get('/api/airly-data', (req, res) => {
 
     mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
         if (error) {
-            log.saveError(12, error);
+            log.saveError(13, error);
             throw error;
         }
 
@@ -20,7 +20,7 @@ app.get('/api/airly-data', (req, res) => {
 
         dbo.collection('airlyData').find().sort({timestamp:-1}).limit(1).toArray((error, result) => {
             if (error) {
-                log.saveError(20, error);
+                log.saveError(21, error);
                 throw error;
             }
 
@@ -39,15 +39,15 @@ app.get('/api/advertisements', (req, res) => {
 
     mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
         if (error) {
-            log.saveError(38, error);
+            log.saveError(40, error);
             throw error;
         }
 
         let dbo = db.db('pollution-warning-display-data');
 
-        dbo.collection('advertisements').find().sort({timestamp:-1}).toArray((error, result) => {
+        dbo.collection('advertisements').find().toArray((error, result) => {
             if (error) {
-                log.saveError(46, error);
+                log.saveError(48, error);
                 throw error;
             }
 
@@ -59,14 +59,13 @@ app.get('/api/advertisements', (req, res) => {
     });
 });
 
-
 // DELETE CHOSEN AD
 app.route('/submit/delete/:id').post((req, res) => {
     let o_id = req.params.id;
 
     mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
         if(error) {
-            log.saveError(63, error);
+            log.saveError(66, error);
             throw error;
         }
         let dbo = db.db('pollution-warning-display-data');
@@ -85,7 +84,7 @@ app.route('/submit/delete/:id').post((req, res) => {
 app.route('/submit/add/:title/:desc').post((req, res) => {
     mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
         if(error) {
-            log.saveError(63, error);
+            log.saveError(84, error);
             throw error;
         }
         let dbo = db.db('pollution-warning-display-data');
@@ -96,6 +95,52 @@ app.route('/submit/add/:title/:desc').post((req, res) => {
             return res.status(200).send({
                 success: true
             })
+        });
+    });
+});
+
+// SET SCREENS DURATION
+app.route('/submit/set-ad-duration/:infoDuration/:adDuration').post((req, res) => {
+    mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
+        if(error) {
+            log.saveError(102, error);
+            throw error;
+        }
+        let dbo = db.db('pollution-warning-display-data');
+
+        dbo.collection('screensDuration', (err, obj) => {
+            obj.insertOne({ adDuration: req.params.infoDuration, infoDuration: req.params.adDuration });
+            res.redirect('http://localhost:3000/dashboard');
+            return res.status(200).send({
+                success: true
+            })
+        });
+    });
+});
+
+// SERVE ALL DURATIONS
+app.get('/api/durations', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', config.CLIENT_URL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+    mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
+        if (error) {
+            log.saveError(126, error);
+            throw error;
+        }
+
+        let dbo = db.db('pollution-warning-display-data');
+
+        dbo.collection('screensDuration').find().toArray((error, result) => {
+            if (error) {
+                log.saveError(134, error);
+                throw error;
+            }
+
+            return res.status(200).send({
+                success: 'true',
+                data: result
+            });
         });
     });
 });
