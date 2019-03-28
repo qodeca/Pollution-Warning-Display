@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { selectedAdvertisement } from '../../actions';
 import { mapStateToProps }       from '../../functions';
 import SelectedAd                from './SelectedAd';
+import {Link}                    from 'react-router-dom';
 
 class AdsList extends Component {
+    handleClick(ad) {
+        this.props.history.push(`/dashboard/edit-ad/${ad._id}`)
+    }
     render() {
         return (
             <Fragment>
@@ -29,7 +34,7 @@ class AdsList extends Component {
                                             </div>
                                             <div className="row">
                                                 <div className="col-md-12">
-                                                    <h6 className="mb-2 text-justify">{ad.description}</h6>
+                                                    <h6 className="mb-2 text-justify">{ad.desc}</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -42,7 +47,7 @@ class AdsList extends Component {
                                         </div>
 
                                         <div className="col-md-auto">
-                                            <button type="button" className="btn btn-warning"><b>Edytuj</b></button>
+                                            <Link to={`/dashboard/edit-ad/${ ad._id }`} onClick={ this.handleClick }><button type="button" className="btn btn-warning"><b>Edytuj</b></button></Link>
                                         </div>
 
                                         <div className="col-md-auto">
@@ -62,4 +67,4 @@ class AdsList extends Component {
     }
 }
 
-export default connect(mapStateToProps, { selectedAdvertisement })(AdsList);
+export default connect(mapStateToProps, { selectedAdvertisement })(withRouter(AdsList));

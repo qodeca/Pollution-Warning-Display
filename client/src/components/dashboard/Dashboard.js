@@ -36,7 +36,6 @@ class Dashboard extends Component {
 
                         <Route exact path="/dashboard" component={ AddNewAd } />
                         <Route exact path="/dashboard/add-new-ad" component={ EditNewAd } />
-
                         <div className="row mt-5">
                             <div className="col-md-auto">
                                 <h2 className="mb-3">CZAS TRWANIA EKRANÓW</h2>

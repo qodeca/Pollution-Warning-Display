@@ -4,14 +4,14 @@ import axios from 'axios';
 import socketIO from 'socket.io-client';
 import { connect } from 'react-redux';
 
-import Loading                                                           from './Loading';
-import PollutionWarningDisplay                                           from './pollution-warning-display/PollutionWarningDisplay';
-import Advertisement                                                     from './advertisement/Advertisement';
-import history                                                           from '../history';
+import Loading from './Loading';
+import PollutionWarningDisplay from './pollution-warning-display/PollutionWarningDisplay';
+import Advertisement from './advertisement/Advertisement';
+import history from '../history';
 import {pollutionData, advertisementsData, timeToSkipAd, timeToSkipInfo} from '../actions';
-import { mapStateToProps }                                               from '../functions';
-import Login                                                             from './login/Login';
-import Dashboard                                                         from './dashboard/Dashboard';
+import { mapStateToProps } from '../functions';
+import Dashboard from './dashboard/Dashboard';
+import EditAd from './dashboard/EditAd';
 
 class App extends Component {
     async fetchData() {
@@ -71,8 +71,8 @@ class App extends Component {
                     <Route exact path="/" component={ Loading } />
                     <Route exact path="/pollution-warning-display" component={ PollutionWarningDisplay } />
                     <Route exact path="/advertisement" component={ Advertisement } />
-                    <Route exact path="/login" component={ Login } />
                     <Route exact path="/dashboard" component={ Dashboard } />
+                    <Route exact path="/dashboard/edit-ad/:id" component={ EditAd } />
                 </Router>
             </div>
         );

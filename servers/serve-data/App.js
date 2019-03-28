@@ -145,6 +145,60 @@ app.get('/api/durations', (req, res) => {
     });
 });
 
+app.get('/api/single-ad/:id', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', config.CLIENT_URL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+    let o_id = req.params.id;
+
+    mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
+        if (error) {
+            log.saveError(126, error);
+            throw error;
+        }
+
+        let dbo = db.db('pollution-warning-display-data');
+
+        dbo.collection('advertisements').find({ _id: new mongodb.ObjectID(o_id) }).toArray((error, result) => {
+            if (error) {
+                log.saveError(1, 162);
+                throw error;
+            }
+
+            return res.status(200).send({
+                success: 'true',
+                data: result
+            });
+        });
+    });
+});
+
+// EDIT CHOSEN AD
+app.route('/submit/edit-ad/:id/:title/:desc').post((req, res) => {
+    let o_id = req.params.id;
+    let o_title = req.params.title;
+    let o_desc = req.params.desc;
+
+    mongodb.MongoClient.connect(config.DATABASE_URL, { useNewUrlParser: true }, (error, db) => {
+        if(error) {
+            log.saveError(182, error);
+            throw error;
+        }
+        let dbo = db.db('pollution-warning-display-data');
+
+        dbo.collection('advertisements').update(
+            {_id: new mongodb.ObjectID(o_id) },
+            { title : o_title, desc: o_desc },
+            function(err, result) {
+                console.log(result);
+            });
+        });
+        res.redirect('http://localhost:3000/dashboard');
+        return res.status(200).send({
+            success: true
+        });
+});
+
 process.on('unhandledRejection', reason => log.saveError(34, reason));
 process.on('uncaughtException', reason => log.saveError(35, reason));
 
